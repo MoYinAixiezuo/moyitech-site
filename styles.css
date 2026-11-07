@@ -36,15 +36,15 @@ button { font: inherit; }
   max-width: var(--max); margin: 0 auto; padding: 0 32px;
   position: relative; border-bottom: 1px solid var(--line);
 }
-.brand-band { display: flex; align-items: flex-end; justify-content: flex-start; gap: 24px; padding: 24px 0 18px; border-bottom: 1px solid var(--line); }
+.brand-band { position: relative; display: flex; align-items: flex-end; justify-content: flex-start; gap: 24px; padding: 24px 0 20px; border-bottom: 1px solid var(--line); }
 .brand { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .brand-word { font-family: var(--sans); font-size: clamp(42px, 7.2vw, 96px); line-height: .9; letter-spacing: -.045em; font-weight: 600; white-space: nowrap; }
-.brand-sub { font-family: var(--mono); font-size: 11px; line-height: 1.4; letter-spacing: .16em; color: var(--faint); }
-.nav-row { display: flex; align-items: center; gap: 26px; padding: 14px 0 16px; }
-.nav-links { display: flex; gap: 28px; font-family: var(--mono); font-size: 13px; letter-spacing: .04em; color: var(--muted); }
+.brand-sub { position: absolute; right: 0; bottom: 22px; font-family: var(--mono); font-size: 13px; line-height: 1.4; letter-spacing: .16em; color: var(--faint); }
+.nav-row { position: relative; display: flex; align-items: center; justify-content: center; gap: 26px; padding: 14px 0 16px; }
+.nav-links { display: flex; gap: 34px; font-family: var(--mono); font-size: 13px; letter-spacing: .04em; color: var(--muted); }
 .nav-links a { transition: color .2s; }
 .nav-links a:hover { color: var(--text); }
-.nav-cta { margin-left: auto; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; border: 1px solid var(--line-2); padding: 8px 12px; color: var(--muted); transition: .2s; }
+.nav-cta { position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 11px; letter-spacing: .1em; border: 1px solid var(--line-2); padding: 8px 12px; color: var(--muted); transition: .2s; }
 .nav-cta:hover { border-color: var(--cool-dim); color: var(--cool); }
 .nav-cta span { color: var(--faint); }
 .nav-menu { display: none; width: 36px; height: 36px; background: none; border: 1px solid var(--line-2); color: var(--text); }
@@ -59,9 +59,13 @@ button { font: inherit; }
 .eyebrow { margin: 0 0 18px; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; color: var(--faint); display: flex; align-items: center; gap: 8px; }
 .dot { width: 5px; height: 5px; background: var(--cool); display: inline-block; }
 .hero h1 {
-  margin: 0; font-size: clamp(32px, 3.8vw, 42px); line-height: 1.24; letter-spacing: -.03em; font-weight: 600;
+  margin: 0; display: inline-block; font-size: clamp(32px, 3.8vw, 42px); line-height: 1.24; letter-spacing: -.03em; font-weight: 600;
+  background: linear-gradient(108deg, #5ff5ff 0%, #ffffff 26%, #b58bff 58%, #ff9a62 84%, #ffd166 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  filter: drop-shadow(0 0 22px rgba(95, 245, 255, .22));
 }
-.hero h1 em { font-style: normal; color: var(--cool); }
+.hero h1 em { font-style: normal; color: inherit; -webkit-text-fill-color: transparent; }
 .hero-sub { margin: 22px 0 0; max-width: 620px; color: var(--muted); font-size: 17px; line-height: 1.9; }
 .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
 .btn { display: inline-flex; align-items: center; gap: 16px; padding: 11px 17px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em; border: 1px solid var(--line-2); transition: .2s; }
@@ -189,12 +193,13 @@ button { font: inherit; }
   .brand { gap: 12px; }
   .brand-mark { width: 40px; height: 40px; font-size: 20px; }
   .brand-word { font-size: 38px; }
+  .brand-sub { position: static; margin-top: 4px; font-size: 10px; }
   .brand-meta { display: none; }
   .nav-row { padding: 12px 0; }
   .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--line); padding: 16px 20px; flex-direction: column; gap: 12px; z-index: 30; }
   .nav-links.open { display: flex; }
   .nav-cta { display: none; }
-  .nav-menu { display: block; margin-left: auto; }
+  .nav-menu { position: absolute; right: 0; top: 50%; transform: translateY(-50%); display: block; margin-left: 0; }
   .hero, .works, .about, .log, .contact { padding-left: 20px; padding-right: 20px; }
   .rule { padding-left: 20px; padding-right: 20px; }
   .hero { padding-top: 42px; padding-bottom: 54px; }

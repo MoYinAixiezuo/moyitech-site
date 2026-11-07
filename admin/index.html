@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#080a0c">
+<title>内容后台 · 昩晹科技</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../">昩晹科技 <small>CONTENT</small></a>
+  <a class="top-link" href="../" target="_blank" rel="noopener">查看主站 ↗</a>
+</header>
+
+<main class="wrap">
+  <section id="login" class="card login">
+    <p class="micro">LOCAL ADMIN / GITHUB API</p>
+    <h1>内容后台</h1>
+    <p class="sub">这里没有服务器。保存时，浏览器直接调用 GitHub API 修改主站 <code>content.json</code>，GitHub Pages 会自动发布。</p>
+    <div class="warn">只在私人电脑使用。Token 会保存在此浏览器 localStorage，不会提交到仓库。</div>
+    <label class="field"><span>GitHub Fine-grained Token</span><input class="input" id="token" type="password" placeholder="github_pat_..." autocomplete="off" /></label>
+    <div class="actions">
+      <button class="btn primary" type="button" id="login-btn">登录并读取</button>
+      <a class="btn" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">创建 Token ↗</a>
+    </div>
+    <details class="help">
+      <summary>Token 怎么配</summary>
+      <ol>
+        <li>Repository access：Only select repositories → <code>MoYinAixiezuo/moyitech-site</code></li>
+        <li>Permissions → Contents：Read and write</li>
+        <li>生成后粘贴到上面</li>
+      </ol>
+    </details>
+  </section>
+
+  <section id="editor" class="hidden">
+    <div class="bar">
+      <div><p class="micro">MOYITECH.TOP / CONTENT</p><h1>页面文字</h1></div>
+      <div class="actions">
+        <a class="btn" href="../" target="_blank" rel="noopener">预览 ↗</a>
+        <button class="btn" type="button" id="backup">下载 JSON</button>
+        <button class="btn" type="button" id="logout">退出</button>
+        <button class="btn primary" type="button" id="save">保存并发布</button>
+      </div>
+    </div>
+    <p class="status" id="status">读取中…</p>
+
+    <form id="form">
+      <fieldset><legend>品牌</legend>
+        <label class="field"><span>中文主标题</span><input class="input" data-k="brand" /></label>
+        <label class="field"><span>英文副标题</span><input class="input" data-k="brandSub" /></label>
+      </fieldset>
+
+      <fieldset><legend>首屏</legend>
+        <label class="field"><span>眉标</span><input class="input" data-k="heroEyebrow" /></label>
+        <div class="row2">
+          <label class="field"><span>主标题第一行</span><input class="input" data-k="heroLine1" /></label>
+          <label class="field"><span>主标题第二行</span><input class="input" data-k="heroLine2" /></label>
+        </div>
+        <label class="field"><span>副标题 / 介绍</span><textarea class="textarea" data-k="heroSub" rows="3"></textarea></label>
+      </fieldset>
+
+      <fieldset><legend>墨引作品卡</legend>
+        <div class="row2">
+          <label class="field"><span>小标签</span><input class="input" data-k="productKicker" /></label>
+          <label class="field"><span>作品名</span><input class="input" data-k="productTitle" /></label>
+        </div>
+        <label class="field"><span>简介</span><textarea class="textarea" data-k="productDesc" rows="3"></textarea></label>
+        <label class="field"><span>特性标签（用逗号分隔）</span><input class="input" data-k="productTags" /></label>
+      </fieldset>
+
+      <fieldset><legend>关于</legend>
+        <label class="field"><span>标题</span><input class="input" data-k="aboutTitle" /></label>
+        <label class="field"><span>右侧说明（支持换行）</span><textarea class="textarea" data-k="aboutNote" rows="3"></textarea></label>
+        <div class="principles">
+          <label class="field"><span>原则 1 标题</span><input class="input" data-p="0.title" /></label>
+          <label class="field"><span>原则 1 内容</span><textarea class="textarea" data-p="0.desc" rows="2"></textarea></label>
+          <label class="field"><span>原则 2 标题</span><input class="input" data-p="1.title" /></label>
+          <label class="field"><span>原则 2 内容</span><textarea class="textarea" data-p="1.desc" rows="2"></textarea></label>
+          <label class="field"><span>原则 3 标题</span><input class="input" data-p="2.title" /></label>
+          <label class="field"><span>原则 3 内容</span><textarea class="textarea" data-p="2.desc" rows="2"></textarea></label>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>更新日志</legend>
+        <div class="row2">
+          <label class="field"><span>标题</span><input class="input" data-k="logTitle" /></label>
+          <label class="field"><span>说明</span><input class="input" data-k="logNote" /></label>
+        </div>
+        <div id="logs"></div>
+      </fieldset>
+
+      <fieldset><legend>联系与页脚</legend>
+        <div class="row2">
+          <label class="field"><span>联系标题第一行</span><input class="input" data-k="contactLine1" /></label>
+          <label class="field"><span>联系标题第二行</span><input class="input" data-k="contactLine2" /></label>
+        </div>
+        <label class="field"><span>邮箱</span><input class="input" data-k="contactEmail" type="email" /></label>
+        <div class="row2">
+          <label class="field"><span>页脚主标题</span><input class="input" data-k="footerBrand" /></label>
+          <label class="field"><span>页脚副标题</span><input class="input" data-k="footerSub" /></label>
+        </div>
+        <label class="field"><span>版权</span><input class="input" data-k="footerCopyright" /></label>
+      </fieldset>
+
+      <div class="actions end">
+        <button class="btn primary" type="submit">保存并发布</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+<script src="admin.js" defer></script>
+</body>
+</html>

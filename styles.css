@@ -45,7 +45,7 @@ button { font: inherit; }
   filter: drop-shadow(0 0 24px rgba(0, 229, 255, .16));
 }
 .brand-word i { font-style: normal; }
-.brand-sub { display: block; margin-top: 12px; text-align: right; font-family: var(--mono); font-size: clamp(26px, 3.4vw, 50px); line-height: 1.1; letter-spacing: .24em; color: var(--faint); }
+.brand-sub { display: block; margin-top: 12px; text-align: left; font-family: var(--mono); font-size: clamp(26px, 3.4vw, 49px); line-height: 1.1; letter-spacing: .24em; color: var(--faint); }
 .nav-row { position: relative; display: flex; align-items: center; justify-content: center; gap: 26px; padding: 14px 0 16px; }
 .nav-links { display: flex; gap: 34px; font-family: var(--mono); font-size: 13px; letter-spacing: .04em; color: var(--muted); }
 .nav-links a { transition: color .2s; }
